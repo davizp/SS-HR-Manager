@@ -1,0 +1,50 @@
+//
+// Variables
+// --------------------------------------------------
+
+// Path
+	$font-path: 			"/public/dist/fonts";
+
+// Colors
+	$classic-white:				#e6e0d9;
+	$coral:						#f1938b;
+	$pink: 						#f4c9c7;
+	$lilac: 					#e8c8dd;
+	$sea-foam:					#b4e3cf;
+	$sea-glass: 				#38b6a5;
+	$sand:						#b3a592;
+	$kiwi:						#cabc16;
+	$tangerine:					#e95d2c;
+	$fuchsia:					#e93a6b;
+	$radiant-red:				#c0223d;
+	$chocholate:				#432b2e;
+
+	$brown-light:				#cead83;
+	$brown: 					#887d6a;
+	$brown-dark: 				#453c2d;
+
+// Scaffolding
+	$body-bg:					#fff !default;
+	$text-color:				$brown !default;
+	$link-color:				$brown-dark !default;
+	$link-hover-color:			lighten($link-color, 15%) !default;
+
+// Typography
+	$font-family-sans-serif:	"Helvetica Neue", Helvetica, Arial, sans-serif !default;
+
+	$font-family-serif:			Georgia, "Times New Roman", Times, serif !default;
+	$font-family-monospace:		Menlo, Monaco, Consolas, "Courier New", monospace !default;
+	$font-family-base:			$font-family-sans-serif !default;
+
+	$font-size-base:			12px !default;
+	$font-size-large:			20px !default;
+	$font-size-small:			10px !default;
+
+	$font-size-h1:				61px !default;
+	$font-size-h2:				30px !default;
+	$font-size-h3:				25px !default;
+	$font-size-h4:				20px !default;
+	$font-size-h5:				$font-size-base !default;
+	$font-size-h6:				10px !default;
+
+	$line-height-base:			20px !default;

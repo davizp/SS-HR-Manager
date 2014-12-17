@@ -1,0 +1,35 @@
+  <div class="loading-container">
+    <div class="pulse"></div>
+  </div>
+
+
+ <div id="slides">
+    <ul class="slides-container">
+        <li><img src="assets/images/1.jpg" alt=""></li>
+        <li><img src="assets/images/2.jpg" alt=""></li>
+        <li><img src="assets/images/3.jpg" alt=""></li>
+        <li><img src="assets/images/4.jpg" alt=""></li>
+        <li><img src="assets/images/5.jpg" alt=""></li>
+        <li><img src="assets/images/6.jpg" alt=""></li>
+        <li><img src="assets/images/7.jpg" alt=""></li>
+        <li><img src="assets/images/8.jpg" alt=""></li>
+        <li><img src="assets/images/9.jpg" alt=""></li>
+        <li><img src="assets/images/10.jpg" alt=""></li>
+        <li><img src="assets/images/11.jpg" alt=""></li>
+        <li><img src="assets/images/12.jpg" alt=""></li>
+
+
+
+    </ul>
+ {{!--    <nav class="slides-navigation">
+      <a href="#" class="next">
+        <i class="icon-chevron-right"></i>
+      </a>
+      <a href="#" class="prev">
+        <i class="icon-chevron-left"></i>
+      </a>
+    </nav> --}}
+  </div>
+  <style type="text/css">
+  body{overflow: hidden;}
+  </style>

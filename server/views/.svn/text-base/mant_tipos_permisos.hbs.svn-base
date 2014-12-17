@@ -1,0 +1,89 @@
+<!-- Modal -->
+<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="myModalLabel" >Eliminar Permanentemente</h4>
+			</div>
+			<div class="modal-body">
+				<!-- FORMS ================================== -->
+				<p id="msj_eliminar"></p>
+				<!--/FORMS ================================== -->
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" id="eliminar" >Eliminar</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /Modal ________________________________________________________________________________________________________________________________________________________-->
+<!-- Modal -->
+<div class="modal fade" id="modal_tipos_permisos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="modal_tipos_permisos_titulo" ></h4>
+			</div>
+			<div class="modal-body">
+				<!-- FORMS ================================== -->
+				<form role="form" id="form_tipos_permisos" class="form-horizontal well" method="post" action="/tipos_permisos-data">
+					<div class="form-group">
+						<label for="tipo_permiso">Nombre del Tipo de Permiso:</label>
+						<input type="text" name="tipo_permiso" class="form-control" placeholder="Permiso" onblur = "alerta($(this))" required>
+					</div>
+				</form>
+				<!--/FORMS ================================== -->
+			</div>
+			<div class="modal-footer">
+				<button id = "guardar" type="button" class="btn btn-danger" id="confirm" >Guardar</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /Modal ________________________________________________________________________________________________________________________________________________________-->
+
+<div class = "container-fluid">
+	<div class="page-header"><h1>Mantenimiento de Tipos de Permisos</h1></div> 
+	<a onclick = "form_nuevo()" class = "btn btn-primary" data-toggle="modal" data-target="#modal_tipos_permisos"><span class="glyphicon glyphicon-pencil" ></span> Nuevo</a>
+	<button id="" class="btn btn-success" type="button" onclick="exportar()"><span class="glyphicon glyphicon-save" ></span>Exportar</button>
+	<button id="" class="btn btn-warning" type="button" onclick="$('#importar').slideDown();"><span class="glyphicon glyphicon-open" ></span>Importar</button><br/><br/>
+	
+	{{!-- <form role="form" id="form" class="form-horizontal" method="post" action="/mant_tipos_permisos">
+		<div class="input-group">
+			<input type="text" id= "buscar" name = "buscar" class="form-control" placeholder="Buscar...">
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="button"  style="padding-bottom: 7px;"><span class="glyphicon glyphicon-search"></span></button>
+			</span>
+		</div><!-- /input-group --> --}}
+	<form role="form" id="form" class="form-horizontal" method="post" action="/tipos_permisos-data">
+		<div id="importar" style="display:none">
+			<div id="drop_zone" >Arrastre AQUI Archivos de EXCEL .XLS y .XLSX</div>
+			<div class="ejemplo ejemplo-tper"></div>			
+			<input type="file" id="archivo" accept=".xls,.xlsx">
+			<output id="list"></output>
+			<button id="" class="btn btn-danger" type="submit">Enviar</button>
+			<button id="cancelar" class="btn btn-default" type="reset">Cancelar</button>
+		</div>
+	</form>
+
+
+	<table id = "tipos_permisos" class="table table-hover">
+		<thead>
+			<tr>
+				<th>Tipo de Permiso</th>
+				<th>Acción</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{{{t_dep}}}
+		</tbody>
+	</table>
+	{{!-- </form> --}}
+</div>
+
+{{{js_var}}}

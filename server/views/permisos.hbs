@@ -1,0 +1,93 @@
+<div class = "container-fluid">
+	<div class="bs-example">
+		<div class="alert alert-danger fade in" role="alert">
+			<!--button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button-->
+			<h4>Error!</h4>
+			<p id = "parrafo"></p>
+			<p>
+			<button id = "aceptar" type="button" class="btn btn-danger" onClick = "">Aceptar</button>
+			</p>
+		</div>
+	</div>
+
+	<div class="page-header"><h1><span class="glyphicon glyphicon-list-alt"></span> Solicitud de Permiso</h1></div>
+	<form role="form" id = "form1" class="well" method="post" action="/permisos-data">		
+		<div class="form-group">
+			<label for="colaborador">Colaborador</label>
+			{{{usuario}}}
+		</div>
+
+		<div class="form-group">        
+			<label for="departamento">Departamento:</label>
+			<select id = "departamento" name="dep"  class="form-control" disabled required>
+				{{{departamento}}}
+			</select> 
+		</div>
+
+		<div class="form-group">
+			<label for="">Seleccione:</label><br/>
+			<div class="btn-group" data-toggle="buttons">
+				{{{radio}}}
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="fpermiso">Fecha del Permiso:</label>
+			<input type="text" id = "fpermiso" name = "fper" class="datepicker form-control" placeholder="MM/DD/YYYY" onchange = "fx_tconcedido($('#tconcedido2'))"   onblur = "alerta($(this))" autocomplete="off" readonly required>
+		</div>
+
+		<div id = "gflotante" class="form-group" style = "display:none;">
+			<label for="flotante">Ha Seleccionado <span class = "badge">Día Flotante</span>, Ingrese fecha en que trabajó:</label>
+			<input type="text" id = "flotante" name="flo" class="datepicker-flotante form-control" pattern=".{5,}" required title="Ingrese una Fecha" placeholder="MM/DD/YYYY"  onblur = "alerta($(this))" autocomplete="off" readonly>
+		</div>
+
+
+	  <!--
+	    <div class="form-group">
+	      <label for="tconcedido">Total Tiempo Concedido:</label>
+	      <div id = "padre_tconcedido">
+	        <div class="dropdown">
+	            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+	              1 día(s)
+	              <span class="caret"></span>
+	            </button>
+	            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" id = "fpermiso">
+	              <li role="presentation"><a role="menuitem" tabindex="-1" onCLICK="tconcedido($(this))">1</a></li> 
+	              <li role="presentation"><a role="menuitem" tabindex="-1" onCLICK="tconcedido($(this))">2</a></li> 
+	              <li role="presentation"><a role="menuitem" tabindex="-1" onCLICK="tconcedido($(this))">3</a></li>
+	              <li role="presentation"><a role="menuitem" tabindex="-1" onCLICK="tconcedido($(this))">4</a></li>
+	              <li role="presentation" class="divider"></li>
+	              <li role="presentation"><a role="menuitem" tabindex="-1" onCLICK="tconcedido($(this))">mayor de 4</a></li>
+	            </ul>
+	          </div>
+	        </div>    
+	    </div>
+	    -->
+
+		<div class="form-group">        
+			<label for="tconcedido">Total Tiempo Concedido (En días):</label>
+			{{!-- <select id = "tconcedido" name="tcon" class="form-control" onchange = "fx_tconcedido($(this))">
+				<option value = "1" selected>1 día</option>
+				<option value = "2" >2 días</option>
+				<option value = "3" >3 días</option>
+				<option value = "4" >4 días</option>
+				<option value = "5" >5 días</option>
+				<option value = "0" >mayor de 5</option>				
+			</select> --}}
+			<input type="text" name="tcon" id = "tconcedido2" class="form-control" style = "display:inline" maxlength="2" placeholder="Dias Concedidos" autocomplete="off" required>
+		</div>
+	    
+		<div class="form-group">
+			<label for="ftrabajo"> Fecha que deberá presentarse a trabajar:</label>
+			<input type="text" id="ftrabajo" name="ftra" class="form-control" placeholder="MM/DD/YYYY" autocomplete="off" readonly required style="cursor: not-allowed !important;">
+		</div>
+
+		<div class="form-group">
+			<label style = "float:right;" for="colaborador">Tienes  <span id="badge_dper" class = "badge"></span> Día(s) Personales Disponibles!</label>
+		</div>
+
+		<button  type="submit" class="btn btn-danger" >Enviar</button>
+	</form>
+</div>
+
+{{{js_dper}}}

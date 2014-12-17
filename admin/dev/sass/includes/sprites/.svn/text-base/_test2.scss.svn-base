@@ -1,0 +1,19 @@
+/*
+Icon classes can be used entirely standalone. They are named after their original file names.
+
+```html
+<i class="icon-home"></i>
+```
+*/
+.sprite-fork {
+  background-image: url(../../../../dist/img/sprites/test2.png);
+  background-position: 0px 0px;
+  width: 32px;
+  height: 32px;
+}
+.sprite-twitter {
+  background-image: url(../../../../dist/img/sprites/test2.png);
+  background-position: -32px 0px;
+  width: 32px;
+  height: 32px;
+}

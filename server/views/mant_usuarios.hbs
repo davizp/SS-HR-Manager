@@ -1,0 +1,126 @@
+<!-- Modal -->
+<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="myModalLabel" >Eliminar Permanentemente</h4>
+			</div>
+			<div class="modal-body">
+				<!-- FORMS ================================== -->
+				<p id="msj_eliminar"></p>
+				<!--/FORMS ================================== -->
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" id="eliminar" >Eliminar</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /Modal ________________________________________________________________________________________________________________________________________________________-->
+
+<!-- Modal -->
+<div class="modal fade" id="modal_usr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="modal_usr_titulo" ></h4>
+			</div>
+			<div class="modal-body">
+				<!-- FORMS ================================== -->
+				<form role="form" id="form_usr"class="well" method="post" action="/usuarios-data">
+					<div class="form-group">
+						<label for="nombre">Nombre:</label>
+						<input type="text" name="nom" class="form-control" id="nombre" placeholder="Nombre" onblur = "alerta($(this))" required>
+					</div>
+
+					<div class="form-group">
+						<label for="apellido">Apellido:</label>
+						<input type="text" name="ape" class="form-control" id="apellido" placeholder="Apellido" onblur = "alerta($(this))" required>
+					</div>
+
+					<div class="form-group">        
+						<label for="departamento">Departamento:</label>
+						<select id = "departamento" name="dep"  class="form-control">
+							{{{cmb_dep}}}
+						</select> 
+					</div>
+			    
+					<div class="form-group">  
+						<label for="email">Email:</label> <br/>
+						<div class="input-group">      
+							<span class="input-group-addon">@</span>
+							<input type="email" id = "email" name = "email" class="form-control" placeholder="Email" onblur = "alerta($(this))"> 
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="fpermiso">Fecha que comenzó a trabajar en San Services:</label>
+						<input type="text" id = "ftra" name = "ftra" class="datepicker-trab form-control" placeholder="MM/DD/YYYY"  onblur = "alerta($(this))" readonly>
+					</div>
+
+					<div class="form-group">
+						<label for="fpermiso">Fecha de Nacimiento</label>
+						<input type="text" id = "fnac" name = "fnac" class="datepicker-bday form-control" placeholder="MM/DD/YYYY"  onblur = "alerta($(this))" readonly required>
+					</div>
+
+					<div class="form-group">
+						<label for="personal">Días Personales Restantes:</label>
+						<select id = "personal" name="per"  class="form-control">
+							<option value="0">Ninguno</option>
+							<option value="1">1 día</option>
+							<option value="2">2 días</option>
+							<option value="3">3 días</option>
+							<option value="4">4 días</option>
+							<option value="5" selected>5 días</option>
+						</select> 
+					</div>
+
+					<div class="form-group">
+						<label for="email">Es Administrador:</label> <br/>
+						<input type="checkbox" name="isadmin" class="switch">
+					</div>
+				</form>
+				<!--/FORMS ================================== -->
+			</div>
+			<div class="modal-footer">
+				<button id = "guardar" type="button" class="btn btn-danger" id="confirm" >Guardar</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /Modal ________________________________________________________________________________________________________________________________________________________-->
+
+<div class = "container-fluid">
+	{{!-- <div class = "container"> --}}
+	<div class="page-header"><h1><span class = "glyphicon glyphicon-user"></span> Mantenimiento de Usuarios</h1></div> 
+	<a onclick = "form_nuevo()" class = "btn btn-primary" data-toggle="modal" data-target="#modal_usr"><span class="glyphicon glyphicon-pencil" ></span> Nuevo</a>
+	<button id="" class="btn btn-success" type="button" onclick="exportar()"><span class="glyphicon glyphicon-save" ></span> Exportar</button>
+	{{!-- <button id="" class="btn btn-warning" type="button" onclick="$('#importar').slideDown();"><span class="glyphicon glyphicon-open" ></span>Importar</button><br/><br/> --}}
+	
+		<table id = "usuarios"class="table table-hover">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Apellido</th>
+					<th>Fecha de Nacimiento</th>
+					<th>Fecha de Trabajo</th>
+					<th>Email</th>
+					<th>Departamento</th>
+					<th>Admin</th>
+					<th>Días Personales</th>
+					<th>Acción</th> {{!-- colspan="2" style="text-align: center;" --}}
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{{{t_usr}}}
+			</tbody>
+		</table>
+	{{!-- </div> --}}
+</div>
+
+{{{js_var}}}

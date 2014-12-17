@@ -1,0 +1,43 @@
+/*
+// Master Stylings
+// Date: August 2014
+// Developers:
+// Luis Matute 		- lmatute@sanservices.hn
+// Adolfo Gutierrez	- agutierrez@sanservices.hn
+// Herson Salinas	- hsalinas@sanservices.hn
+// --------------------------------------------------
+*/
+
+// Core variables and mixins
+// @import "includes/variables"; // Modify this for custom colors, font-sizes, etc
+// @import "includes/mixins";
+
+// BOOTSTRAP
+@import "includes/bootstrap";
+//FullCalendar
+@import "includes/fullcalendar";
+
+// JQUERY-UI
+@import "includes/jquery-ui";
+
+// CSS Reset
+// @import "includes/normalize";
+
+// Fonts
+// @import "includes/fonts";
+
+// Page structure
+@import "includes/layout";
+
+// views
+@import "views/index";
+
+@import "includes/superslides";
+@import "includes/tokenize";
+@import "includes/font-awesome";
+@import "includes/wysiwyg";
+// Sprites
+// @import "includes/sprites/test";
+
+// Utility classes
+@import "includes/utilities"; 	// Has to be last to override when necessary

@@ -1,0 +1,113 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ |	Modal Eliminar																													|
+ |  																																|
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="myModalLabel" >Eliminar Permanentemente</h4>
+			</div>
+			<div class="modal-body">
+				<!-- FORMS ================================== -->
+				<p id="msj_eliminar"></p>
+				<!--/FORMS ================================== -->
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger accion" id="eliminar" >Eliminar</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ |	Modal Nuevo																														|
+ |  																																|
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<div class="modal fade" id="modal_nuevo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="modal_eventos_titulo" >Evento</h4>
+			</div>
+			<div class="modal-body">
+				<!-- FORMS ================================== -->
+				<form role="form" id="form_eventos" class="well" method="post" action="#">
+					<div class="form-group">
+						<label for="no">Nombre del Evento:</label>
+						<input type="text" name="no" class="form-control" placeholder="Evento" onblur = "alerta($(this))" required>
+					</div>
+					<div class="form-group">
+						<label for="fi">Fecha Inicial del Evento:</label>
+						<input type="text" id="startDate" name = "fi" class="form-control" placeholder="MM/DD/YYYY" autocomplete="off" onblur = "alerta($(this))" readonly required>
+					</div>
+					<div class="form-group">
+						<label for="ff">Fecha Final del Evento:</label>
+						<input type="text" id="endDate" name = "ff" class="form-control" placeholder="MM/DD/YYYY" autocomplete="off" onblur = "alerta($(this))" readonly required>
+					</div>
+					<div class="form-group">
+						<label for="in">Detalle del Evento:</label>
+						<div class="input-group">
+							<span class="input-group-btn">
+								<button class="btn btn-default" style="height:70px" data-icon="glyphicon-calendar" role="iconpicker"></button>
+							</span>
+							<textarea type="text" name="inf" class="form-control" placeholder="Detalle del Evento" onblur = "alerta($(this))" required rows="3"></textarea>
+						</div>
+					</div>
+
+				</form>
+				<!--/FORMS ================================== -->
+			</div>
+			<div class="modal-footer">
+				<button id = "guardar" type="button" class="btn btn-danger accion" id="confirm" >Guardar</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ |	Contenido																														|
+ |  																																|
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<div class = "container-fluid">
+
+	<div class="page-header"><h1><span class = "glyphicon glyphicon-calendar"></span> Mantenimiento de Eventos</h1></div>
+	
+	<a onclick = "fx_nuevo()" class = "btn btn-primary" data-toggle="modal" data-target="#modal_nuevo"><span class="glyphicon glyphicon-pencil" ></span> Nuevo</a>
+	<button id="" class="btn btn-success" type="button" onclick="exportar()"><span class="glyphicon glyphicon-save" ></span> Exportar</button>
+	<br/><br/>
+	
+	{{!-- <div style="width:550px;">
+	<!--  CALENDAR -->
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<label><span class="glyphicon glyphicon-calendar"></span> Calendario</label>
+				<div style="clear:both;"></div>
+			</div>
+			<div class="panel-body">
+				<div id="fc-eventos"></div>				
+			</div>
+		</div>
+	<!-- /CALENDAR -->
+	</div> --}}
+
+	<table id = "eventos" class="table table-hover">
+		<thead>
+			<tr>
+				<th>Evento</th>
+				<th>Fecha Inicial</th>
+				<th>Fecha Final</th>
+				<th>Detalle del Evento</th>
+				<th>Acción</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{{{t_eve}}}
+		</tbody>
+	</table>
+</div>

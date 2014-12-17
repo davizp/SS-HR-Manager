@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/honsanservicesfdays/!svn/ver/19/branches/staging/server/views
+END
+index.hbs
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/honsanservicesfdays/!svn/ver/12/branches/staging/server/views/index.hbs
+END
+login.hbs
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/honsanservicesfdays/!svn/ver/12/branches/staging/server/views/login.hbs
+END
+solicitudes_permisos.hbs
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/honsanservicesfdays/!svn/ver/12/branches/staging/server/views/solicitudes_permisos.hbs
+END
+inicio.hbs
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/honsanservicesfdays/!svn/ver/19/branches/staging/server/views/inicio.hbs
+END
+password-code.hbs
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/honsanservicesfdays/!svn/ver/12/branches/staging/server/views/password-code.hbs
+END
+perfil.hbs
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/honsanservicesfdays/!svn/ver/13/branches/staging/server/views/perfil.hbs
+END
+password-reset.hbs
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/honsanservicesfdays/!svn/ver/12/branches/staging/server/views/password-reset.hbs
+END
+consultas_admin.hbs
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/honsanservicesfdays/!svn/ver/12/branches/staging/server/views/consultas_admin.hbs
+END
+mant_departamentos.hbs
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/honsanservicesfdays/!svn/ver/12/branches/staging/server/views/mant_departamentos.hbs
+END
+password-change.hbs
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/honsanservicesfdays/!svn/ver/12/branches/staging/server/views/password-change.hbs
+END
+error.hbs
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/honsanservicesfdays/!svn/ver/12/branches/staging/server/views/error.hbs
+END
+mant_usuarios.hbs
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/honsanservicesfdays/!svn/ver/12/branches/staging/server/views/mant_usuarios.hbs
+END
+notificaciones.hbs
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/honsanservicesfdays/!svn/ver/12/branches/staging/server/views/notificaciones.hbs
+END
+mant_tipos_permisos.hbs
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/honsanservicesfdays/!svn/ver/12/branches/staging/server/views/mant_tipos_permisos.hbs
+END
+permisos.hbs
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/honsanservicesfdays/!svn/ver/12/branches/staging/server/views/permisos.hbs
+END

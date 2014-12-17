@@ -1,0 +1,29 @@
+<div class = "container-fluid">
+	<div class="page-header"><h1>Consultas de Solicitudes de Permisos</h1></div> 
+	<button id="" class="btn btn-success" type="button" onclick="exportar();"><span class="glyphicon glyphicon-download-alt" ></span>Exportar</button><br/><br/>
+
+	<div class="date_filter">
+		De   :<input id="startDate" type="text" class="form-control" readonly>
+		Hasta:<input id="endDate" type="text" class="form-control" readonly>
+		<button id="reset" type="button" class="btn btn btn-default">Reset</button>  
+	</div>
+		
+	<table id = "consultas" class="table table-hover bSort">
+		<thead>
+			<tr>
+				<th>Colaborador</th>
+				<th>Tipo de Permiso</th>
+				<th>Fecha del Permiso</th>
+				<th>Departamento</th>
+				<th>Día en que Trabajó</th>
+				<th>Días Concedido(s)</th>
+				<th>Fecha de Retorno</th>
+				<th>Aprobado</th>
+				<th>Jefe que Apr / Rec</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{{t_con}}}
+		</tbody>
+	</table>
+</div><!--  /container-fluid  -->

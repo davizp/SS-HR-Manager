@@ -1,0 +1,38 @@
+<div class="container">
+		<form class="col-md-4 well login"   style=" margin:0 auto; float:none;" role="form" method="post" action="/login">
+			<legend><strong>Login</strong></legend>
+
+			<div class="alert alert-danger alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<strong>Error!</strong> {{mensaje}}
+			</div>
+
+			<label for="email">Email:</label>
+			<input type="email" 	name ="username" class="form-control" placeholder="Email address" value="{{email}}" required></br>
+			<label for="password">Password:</label>
+			<input type="password" 	name ="password" class="form-control" placeholder="Password" required></br>
+			
+			<a href="/password-reset">¿Olvidastes tu Contraseña?</a><br/>
+		
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+			
+		</form>
+</div> <!-- /container -->
+
+<style>
+	.page-content-wrapper{
+		position: absolute;
+		width: 100%;
+		height: 100%;
+	}
+	.container{
+		position: relative;
+		top: 43%;
+		transform: translateY(-50%);
+	}
+	body{
+		overflow-y: hidden;
+	}
+
+</style>

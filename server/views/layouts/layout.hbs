@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>San Services</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/assets/css/master.css">
+
+		<link rel="shortcut icon" type="image/png" href="/assets/css/images/favicon.ico"/>
+		<meta http-equiv="content-language" content="es">
+	</head>
+	<body{{!-- {{#unless login}} style="background:#BA6666; padding-bottom:37px;"{{/unless}} --}}>
+		<!-- NAV =================================================== -->
+		<nav class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+			{{!-- <div class="container container-fluid"> --}}
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/">San Services</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				
+					<!-- FORMS ================================== -->
+					
+
+					<form class="navbar-form navbar-right login" style="margin-right:15px;" role="form" method="post" action="/login">
+						{{#if login}}
+							{{{login}}}
+						{{else}}
+						<div class="form-group">
+							<input type="text" name = "username"placeholder="Email" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<input type="password" name = "password" placeholder="Password" class="form-control" required>
+						</div>
+						<button type="submit" class="btn btn-success">Ingresar</button>
+						{{/if}}
+					</form>
+
+					<!-- /FORMS ================================== -->
+
+				</div><!-- /.navbar-collapse -->
+			{{!-- </div><!-- /.container-fluid --> --}}
+		</nav>
+		
+		<div id = "wrapper{{#unless auth}} toggled{{/unless}}">
+			{{#if auth}}
+			<!-- ASIDE NAV ===================================================  -->
+			<div id="sidebar-wrapper" >
+				<ul class="sidebar-nav">
+					{{#unless admin}}
+					<li class="sidebar-brand"><a href="#">Menú de Usuario</a></li>
+					<li><a href="/inicio"><div class="icono-aside icon-menu"></div>Menú Principal</a></li>
+					<li><a href="/perfil"><div class="icono-aside icono-perfil"></div>Perfil</a></li>
+					<li><a href="/permisos"><div class="icono-aside icono-permisos"></div>Nueva Solicitud</a></li>
+					<li><a href="/historial_solicitudes"><div class="icono-aside icono-historial"></div>Mi Historial de Solicitudes</a></li>
+					{{!-- <li><a href="#"><div class="icono-aside icono-chat"></div>Chat</a></li> --}}
+
+					{{#if jefe}}
+					<li class="sidebar-brand"><a href="#">Menú de Jéfe</a></li>
+					<li><a href="/solicitudes_permisos"><div class="icono-aside icono-solicitud_permiso"></div>Solicitudes de Permisos</a></li>
+					<li><a href="/solicitudes_permisos-historial"><div class="icono-aside icono-historial_solicitudes"></div>Historial de Solicitudes</a></li>
+					{{/if}}
+
+					{{else}}
+					<li class="sidebar-brand"><a href="#">Menú de Administrador</a></li>
+					<li><a href="/mant_usuarios"><div class="icono-aside icono-usuarios"></div>Usuarios</a></li>
+					<li><a href="/mant_tipos_permisos"><div class="icono-aside icono-tipos_permisos"></div>Tipo de Permisos</a></li>
+					<li><a href="/mant_departamentos"><div class="icono-aside icono-departamentos"></div>Departamentos</a></li>
+					<li><a href="/mant_eventos"><div class="icono-aside icono-eventos"></div>Eventos</a></li>
+					<li><a href="/correo"><div class="icono-aside icono-eventos"></div>Enviar Correo</a></li>
+					<li><a href="/consultas_admin"><div class="icono-aside icono-consultar"></div>Todas las Solicitudes</a></li>
+					{{/unless}}
+				</ul>
+			</div>
+			{{/if}}
+			<!-- MAIN =================================================== -->
+			{{!-- <div style="position:fixed; height:100% width:auto;"> --}}
+				<div class="page-content-wrapper">
+					{{{content}}}
+				</div>
+			{{!-- </div> --}}
+		</div>
+
+		<footer class = "footer " role="contentinfo">
+			<p style="text-align: center;">© 2014 Company, Inc.</p>
+		</footer>
+
+
+	</body>
+	{{!-- Scripts --}}
+		{{#if js_view}}
+			<script src="/assets/js/libs/require.js" data-main="/assets/js/views/{{js_view}}"></script>
+		{{else}}
+			<script src="/assets/js/libs/require.js" data-main="/assets/js/app"></script>
+		{{/if}}
+</html>

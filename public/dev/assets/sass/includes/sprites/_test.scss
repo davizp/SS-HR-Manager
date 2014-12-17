@@ -1,0 +1,37 @@
+/*
+Icon classes can be used entirely standalone. They are named after their original file names.
+
+```html
+<i class="icon-home"></i>
+```
+*/
+.sprite-DSCN7552 {
+  background-image: url(../../../../dist/img/sprites/test.png);
+  background-position: 0px 0px;
+  width: 4000px;
+  height: 3000px;
+}
+.sprite-elephant {
+  background-image: url(../../../../dist/img/sprites/test.png);
+  background-position: 0px -3000px;
+  width: 622px;
+  height: 510px;
+}
+.sprite-fork {
+  background-image: url(../../../../dist/img/sprites/test.png);
+  background-position: -622px -3000px;
+  width: 32px;
+  height: 32px;
+}
+.sprite-github {
+  background-image: url(../../../../dist/img/sprites/test.png);
+  background-position: -654px -3000px;
+  width: 32px;
+  height: 32px;
+}
+.sprite-twitter {
+  background-image: url(../../../../dist/img/sprites/test.png);
+  background-position: -686px -3000px;
+  width: 32px;
+  height: 32px;
+}

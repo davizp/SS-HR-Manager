@@ -1,0 +1,83 @@
+<!-- Modal -->
+<div class="modal fade" id="confirmApprove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="myModalLabel" >Aprobar Solicitud</h4>
+			</div>
+			<div class="modal-body">
+				<!-- FORMS ================================== -->
+				<p id="msj_aprobar"></p>
+				<!--/FORMS ================================== -->
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" id="aprobar" >Aprobar</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /Modal ________________________________________________________________________________________________________________________________________________________-->
+<!-- Modal -->
+<div class="modal fade" id="confirmReject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="myModalLabel2" >Rechazar Solicitud</h4>
+			</div>
+			<div class="modal-body">
+				<!-- FORMS ================================== -->
+				<p id="msj_rechazar"></p>
+				<!--/FORMS ================================== -->
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" id="rechazar" >Rechazar</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /Modal ________________________________________________________________________________________________________________________________________________________-->
+
+
+<div class = "container-fluid">
+	<div class="page-header"><h1>{{historial}}Solicitudes de Permisos</h1></div> 
+	<a href="/permisos" class = "btn btn-primary"><span class="glyphicon glyphicon-pencil" ></span>Nuevo</a>
+	<button id="" class="btn btn-success" type="button" onclick="exportar();"><span class="glyphicon glyphicon-download-alt" ></span>Exportar</button><br/><br/>
+
+	<div class="date_filter">
+		De   :<input id="startDate" type="text" class="form-control" readonly>
+		Hasta:<input id="endDate" type="text" class="form-control" readonly>
+		<button id="reset" type="button" class="btn btn btn-default">Reset</button>  
+	</div>
+	
+	{{!-- <form role="form" id="form" class="form-horizontal" method="post" action="/mant_permisos">
+		<div class="input-group">
+			<input type="text" id= "buscar" name = "buscar" class="form-control" placeholder="Buscar...">
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="button"  style="padding-bottom: 7px;"><span class="glyphicon glyphicon-search"></span></button>
+			</span>
+		</div><!-- /input-group --> --}}
+		
+
+		<table id = "permisos" class="table table-hover bSort">
+			<thead>
+				<tr>
+					<th>Colaborador</th>
+					<th>Tipo de Permiso</th>
+					<th>Fecha del Permiso</th>
+					<th>Día en que Trabajó</th>
+					<th>Días Concedido(s)</th>
+					<th>Fecha de Retorno</th>
+					<th>{{table_header}}</th>
+					{{#if th}}<th></th>{{/if}}
+				</tr>
+			</thead>
+			<tbody>
+				{{{t_per}}}
+			</tbody>
+		</table>
+	{{!-- </form> --}}
+</div>

@@ -1,0 +1,78 @@
+require(['/assets/js/app.js','/assets/js/libs/jquery.js'],function(){
+	
+	mifuncion();
+	if($.fn.dataTable != "undefined"){
+		$('.loading-container').fadeOut(function() {
+			$(this).remove();
+		});
+		$('.container-fluid').css({'display':'block'});
+	}
+});
+
+var mifuncion = function(){
+	console.log('Solicitudes_Permisos.js');
+}
+function form_aprobar(x){
+	var hijos = x.closest('tr').children(),
+	id_padre = x.closest('tr').attr("id"),
+	id_usr = hijos[0].getAttribute("value"),
+	id_per = hijos[1].getAttribute("value"),
+	id_dep = hijos[2].getAttribute("value");
+	$("#msj_aprobar").html("¿Estas seguro de Aprobar a la solicitud de <h4 style = 'display:inline;'><span class = 'label label-default'>"+hijos[0].innerHTML+"</span></h4>?");
+	$(	"#aprobar"	).attr("onclick","fx_accion('aprobar',"+id_padre+","+id_usr+","+id_per+","+id_dep+")");
+	
+}
+
+function form_rechazar(x){
+	var hijos = x.closest('tr').children(),
+	id_padre = x.closest('tr').attr("id"),
+	id_usr = hijos[0].getAttribute("value"),
+	id_per = hijos[1].getAttribute("value"),
+	id_dep = hijos[2].getAttribute("value");
+	$("#msj_rechazar").html("¿Estas seguro de Rechazar a la solicitud de <h4 style = 'display:inline;'><span class = 'label label-default'>"+hijos[0].innerHTML+"</span></h4>?");
+	$(	"#rechazar"  ).attr("onclick","fx_accion('rechazar',"+id_padre+","+id_usr+","+id_per+","+id_dep+")");
+	
+}
+
+function fx_accion(accion,sol,usr,per,dep) {
+	
+	var form = document.createElement("form");
+	
+	var txt_sol = document.createElement("input"),
+		txt_usr = document.createElement("input"),
+		txt_per = document.createElement("input"),
+		txt_dep = document.createElement("input"),
+		txt_accion = document.createElement("input");
+
+		txt_sol.value = sol;
+		txt_usr.value = usr;
+		txt_per.value = per;
+		txt_dep.value = dep;
+		txt_accion.value = accion;
+
+		txt_sol.name = "sol";
+		txt_usr.name = "usr";
+		txt_per.name = "per";
+		txt_dep.name = "dep";
+		txt_accion.name = "accion";
+
+		txt_sol.style.display = "none";
+		txt_usr.style.display = "none";
+		txt_per.style.display = "none";
+		txt_dep.style.display = "none";
+		txt_accion.style.display = "none";
+
+		form.appendChild(txt_sol);
+		form.appendChild(txt_usr);
+		form.appendChild(txt_per);
+		form.appendChild(txt_dep);
+		form.appendChild(txt_accion);
+
+		form.method = "POST";
+		form.action = "/solicitudes_permisos-data";
+		
+		$('body').append(form);
+		form.submit();
+
+		console.log("fx_accion");
+}

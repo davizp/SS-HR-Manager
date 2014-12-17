@@ -1,0 +1,76 @@
+<!-- ASIDE NAV =================================================== -->
+<div id="sidebar-wrapper">
+	<ul class="sidebar-nav">
+		<li class="sidebar-brand"><a href="#">Tu Cuenta</a></li>
+		<li><a href="/inicio"><div class="icon-aside icon-menu"></div>Menú Principal</a></li>
+		
+		<li><a href="/logout">Cerrar Sesión</a></li>
+	</ul>
+	<div id="sidebar-wrapper" >
+				<ul class="sidebar-nav">
+					<li class="sidebar-brand"><a href="#">Menú de Usuario</a></li>
+					<li><a href="/inicio"><div class="icon-aside icon-menu"></div>Menú Principal</a></li>
+					<li><a href="/perfil"><div class="icon-aside icon-perfil"></div>Perfil</a></li>
+					
+					<ul class="">
+						<li class="nav nav-second-level"><a href="javascript:editar()"><div class="icon-aside icon-editar"></div>Editar Perfil</a></li>
+						<li class="nav nav-second-level"><a href="/password-change"><div class="icon-aside icon-password"></div>Cambiar Contraseña</a></li>
+					</ul>
+
+					<li><a href="/permisos"><div class="icon-aside icon-permisos"></div>Nueva Solicitud</a></li>
+					<li><a href="/historial_solicitudes"><div class="icon-aside icon-historial"></div>Mi Historial de Solicitudes</a></li>
+					<li><a href="#"><div class="icon-aside icon-chat"></div>Chat</a></li>
+
+					{{#if admin}}
+					<li class="sidebar-brand"><a href="#">Menú de Administrador</a></li>
+					<li><a href="/mant_usuarios"><div class="icon-aside icon-usuarios"></div>Usuarios</a></li>
+					<li><a href="/mant_tipos_permisos"><div class="icon-aside icon-tipos_permisos"></div>Tipo de Permisos</a></li>
+					<li><a href="/mant_departamentos"><div class="icon-aside icon-departamentos"></div>Departamentos</a></li>
+					<li><a href="/consultas_admin"><div class="icon-aside icon-consultar"></div>Todas las Solicitudes</a></li>
+					{{/if}}
+					{{#if jefe}}
+					<li class="sidebar-brand"><a href="#">Menú de Jéfe</a></li>
+					<li><a href="/solicitudes_permisos"><div class="icon-aside icon-solicitud_permiso"></div>Solicitudes de Permisos</a></li>
+					<li><a href="/solicitudes_permisos-historial"><div class="icon-aside icon-historial_solicitudes"></div>Historial de Solicitudes</a></li>
+					{{/if}}
+				</ul>
+			</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="myModalLabel" >Actualizar Datos.</h4>
+			</div>
+			<div class="modal-body">
+				<!-- FORMS ================================== -->
+					<div class="form-group">
+						<label for="pass">Escribe tu Contraseña para poder actualizar los datos:</label>						
+						<input type="password" name="pass" class="form-control" id="pass" placeholder="Contraseña" >
+					</div>
+				<!--/FORMS ================================== -->
+			</div>
+			<div class="modal-footer">
+				<button onclick = "fx_enviar();" type="button" class="btn btn-danger">Actualizar</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="cancelar">Cancelar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /Modal ________________________________________________________________________________________________________________________________________________________-->
+
+<div class = "container-fluid">
+	<div id="msj">{{{msj}}}</div>
+	<div class="page-header"><h1>Mi Perfil</h1></div> 
+	<form role="form" id="form" class="form-horizontal" method="post" action="/perfil">
+		<table id = "usuario"class="table table-bordered noDataTables">
+		{{{t_perfil}}}
+		</table>
+		<td><a style = "display:none;" id="enviar" class = "btn btn-primary" data-toggle="modal" data-target="#confirmUpdate">Enviar</a></td>
+		<button  type="submit"  style = "display:none" id="actualizar" class="btn btn-danger" >Actualizar</button>		
+	</form>
+
+</div>

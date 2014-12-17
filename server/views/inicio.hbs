@@ -1,0 +1,245 @@
+<div class = "container-fluid">
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				</div>
+				<div class="modal-body">
+					...
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>			      
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<h1><span class = "glyphicon glyphicon-home"></span> Inicio</h1>
+	
+
+{{!-- 	<div class="row">
+		<div class="col-md-3"><a href="/perfil" class="icon-col-4 icon-perfil" > <h4>Mi Perfil</h4></a></div>
+		<div class="col-md-3"><a href="#" 		class="icon-col-4 icon-chat" > <h4>Chat</h4></a></div>
+		{{#if jefe}}
+		<div class="col-md-3"><a href="/solicitudes_permisos" 			class="icon-col-4 icon-solicitud_permiso" 	  ><h4>Solicitudes de Permisos </h4></a></div>
+		<div class="col-md-3"><a href="/solicitudes_permisos-historial" class="icon-col-4 icon-historial_solicitudes" ><h4>Historial de Solicitudes</h4></a></div>
+		{{else}}
+		<div class="col-md-3"><a href="/permisos" 				class="icon-col-4 icon-permisos " ><h4> Nueva Solicitud de Permiso  </h4></a></div>
+		<div class="col-md-3"><a href="/historial_solicitudes"  class="icon-col-4 icon-historial" ><h4> Mi Historial de Solicitudes </h4></a></div>
+		{{/if}}
+	</div>
+
+	<div class="row">
+		{{#if admin}}
+		<div class="col-md-3"><a href="/mant_usuarios" 		 class="icon-col-4 icon-usuarios" 		><h4>	  Usuarios	   	</h4></a></div>
+		<div class="col-md-3"><a href="/mant_tipos_permisos" class="icon-col-4 icon-tipos_permisos" ><h4> Tipos de Permisos </h4></a></div>
+		<div class="col-md-3"><a href="/mant_departamentos"  class="icon-col-4 icon-departamentos" 	><h4>	Departamentos  	</h4></a></div>
+		{{/if}}
+
+	</div> --}}
+<div class = "tab">
+	<div class="row">
+
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<label><span class="glyphicon glyphicon-list-alt"></span> Mis Solicitudes Pendientes</label>
+					<a class="btn btn-default" href="/historial_solicitudes" style="float: right;">Ver Todas</a>
+					<div style="clear:both;"></div>
+				</div>
+				<div class="panel-body">	
+					{{!-- <h3>Mis Solicitudes Pendientes</h3> --}}
+					<table id = "pen" class="table table-striped noDataTables">
+						<thead>
+							<tr>
+								<th>Tipo de Permiso</th>
+								<th>Fecha del Permiso</th>
+								<th>Día en que Trabajó</th>
+								<th>Días Concedido(s)</th>
+								<th>Fecha de Retorno</th>
+								<th>Aprobado</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{{t_pen}}}
+						</tbody>
+					</table>
+				</div>
+			</div>			
+		</div>
+
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<label><span class="glyphicon glyphicon-file"></span> Mi Historial de Solicitudes</label>
+					<a class="btn btn-default" href="/historial_solicitudes" style="float: right;">Ver Todas</a>
+					<div style="clear:both;"></div>
+				</div>
+				<div class="panel-body">	
+					{{!-- <h3>Mi Historial de Solicitudes</h3> --}}
+					<table id = "his" class="table table-striped noDataTables">
+						<thead>
+							<t6r>
+								<th>Tipo de Permiso</th>
+								<th>Fecha del Permiso</th>
+								<th>Día en que Trabajó</th>
+								<th>Días Concedido(s)</th>
+								<th>Fecha de Retorno</th>
+								<th>Aprobado</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{{t_his}}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix visible-sm-block"></div>
+	</div>
+{{!-- </div> --}}
+
+	{{#if jefe}}
+{{!-- <div class = "tab"> --}}
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<label><span class="glyphicon glyphicon-pencil"></span> Solicitudes por Aprobar</label>
+					<a class="btn btn-default" href="/solicitudes_permisos" style="float: right;">Ver Todas</a>
+					<div style="clear:both;"></div>
+				</div>
+				<div class="panel-body">
+					{{!-- <h3>Solicitudes por Aprobar</h3> --}}
+					<table id = "jpen" class="table table-striped noDataTables">
+						<thead>
+							<tr>
+								<th>Colaborador</th>
+								<th>Tipo de Permiso</th>
+								<th>Fecha del Permiso</th>
+								<th>Días Concedido(s)</th>
+								<th>Fecha de Retorno</th>
+								<th>Aprobado</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{{t_jpen}}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<label><span class="glyphicon glyphicon-folder-open"></span>  Historial de Solicitudes Jefe</label>
+					<a class="btn btn-default" href="/solicitudes_permisos-historial" style="float: right;">Ver Todas</a>
+					<div style="clear:both;"></div>
+				</div>
+				<div class="panel-body">	
+					{{!-- <h3>Historial de Solicitudes Jefe</h3> --}}
+					<table id = "jhis" class="table table-striped noDataTables">
+						<thead>
+							<tr>
+								<th>Colaborador</th>
+								<th>Tipo de Permiso</th>
+								<th>Fecha del Permiso</th>
+								<th>Días Concedido(s)</th>
+								<th>Fecha de Retorno</th>
+								<th>Aprobado</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{{t_jhis}}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix visible-sm-block"></div>
+	</div>
+{{!-- </div> --}}
+	{{/if}}
+	
+	</div>
+	
+{{!-- 
+	{{#unless jefe}}
+		{{#unless admin}}
+		<div class="row" style="margin-top: 20px;">
+			<div class="panel panel-default">
+				<div class="panel-heading">Menú de Usuario</div>
+				<div class="panel-body">	
+					<div class="col-md-3"><a href="/perfil" class="icon-col-4 icon-perfil" > <h4>Mi Perfil</h4></a></div>
+					<div class="col-md-3"><a href="#" 		class="icon-col-4 icon-chat" > <h4>Chat</h4></a></div>
+					<div class="col-md-3"><a href="/permisos" 				class="icon-col-4 icon-permisos " ><h4> Nueva Solicitud de Permiso  </h4></a></div>
+					<div class="col-md-3"><a href="/historial_solicitudes"  class="icon-col-4 icon-historial" ><h4> Mi Historial de Solicitudes </h4></a></div>
+				</div>
+			</div>
+		</div>
+		{{else}}
+		<div class="row" style="margin-top: 20px;">
+			<div class="panel panel-default">
+				<div class="panel-heading">Menú de Administrador</div>
+				<div class="panel-body">	
+					<div class="col-md-3"><a href="/mant_usuarios" 		 class="icon-col-4 icon-usuarios" 		><h4>		  Usuarios	   		</h4></a></div>
+					<div class="col-md-3"><a href="/mant_tipos_permisos" class="icon-col-4 icon-tipos_permisos" ><h4> 	  Tipos de Permisos 	</h4></a></div>
+					<div class="col-md-3"><a href="/mant_departamentos"  class="icon-col-4 icon-departamentos" 	><h4>		Departamentos 	 	</h4></a></div>
+					<div class="col-md-3"><a href="/consultas_admin" 	 class="icon-col-4 icon-consultar" 		><h4>	Todas las Solicitudes  	</h4></a></div>
+				</div>
+			</div>
+		</div>
+		{{/unless}}
+
+	{{/unless}}
+ --}}
+	<div class = "tab">
+	<div class="row">
+
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<label><span class="glyphicon glyphicon-calendar"></span> Calendario</label>
+					<a class="btn btn-default" href="fc_eventos" style="float: right;">Ver Todas</a>
+					<div style="clear:both;"></div>
+				</div>
+				<div class="panel-body">
+					<div id="fc-eventos"></div>
+					<br/>
+					<span class = "fc-event" style ="height:15px;width:15px;display: inline-block;"></span> Eventos <br/>
+					<span class = "fc-event" style ="height:15px;width:15px;display: inline-block;background:#428bca;border-color: #428bca;"></span> Cumpleaños <br/>
+					<span class = "fc-event" style ="height:15px;width:15px;display: inline-block;background:#f1c40f;border-color: #f1c40f;"></span> Aniversario de Colaboradores <br/>
+
+				</div>
+			</div>			
+		</div>
+
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<label><span class="glyphicon glyphicon-ok"></span> Solicitudes Aprobadas</label>
+					<a class="btn btn-default" href="#" style="float: right;">Ver Todas</a>
+					<div style="clear:both;"></div>
+				</div>
+				<div class="panel-body">
+					<div id="fc-aprobados"></div>
+
+					<br/>
+					<span class = "fc-event" style ="height:15px;width:15px;display: inline-block;background:#5cb85c;border-color: #5cb85c;"></span> Día Personal <br/>
+					<span class = "fc-event" style ="height:15px;width:15px;display: inline-block;background:#95a5a6;border-color: #95a5a6;"></span> Día Flotante <br/>
+					<span class = "fc-event" style ="height:15px;width:15px;display: inline-block;background:#e74c3c;border-color: #e74c3c;"></span> Permiso Especial <br/>
+					<span class = "fc-event" style ="height:15px;width:15px;display: inline-block;background:#f0ad4e;border-color: #f0ad4e;"></span> Incapacidad <br/>
+					{{!-- <span class = "fc-event" style ="height:15px;width:15px;display: inline-block;"></span> Otros <br/> --}}
+
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+</div>

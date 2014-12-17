@@ -1,0 +1,2 @@
+// sanservices_absence - Last Update: Wednesday, October 15th, 2014, 7:50:25 AM CST
+require(["/assets/js/app.js"],function(){mifuncion(),$("#cambiar_password").submit(function(){this.password1.value=hex_sha512(this.password1.value),this.password2.value=hex_sha512(this.password2.value),this.password3.value=hex_sha512(this.password3.value)})});var mifuncion=function(){console.log("Password.js")};
