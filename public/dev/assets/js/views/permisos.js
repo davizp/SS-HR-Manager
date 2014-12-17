@@ -190,5 +190,6 @@ function fx_flotante(x){
 		if($("#tconcedido2").attr("disabled")== "disabled")
 			$("#tconcedido2").removeAttr('disabled');
 		$("#tconcedido2").val("");
+		$("#flotante"	).val("");
 	}
 }

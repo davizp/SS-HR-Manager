@@ -330,7 +330,7 @@
 								// 			f.size, ' bytes, last modified: ',
 								// 			f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
 								// 			'</li>');
-								output.push('<div class="icon-excel icon-excel-',extension.substring(1,5),'"> <div style="position: relative;top: 100%;text-align: center;">',
+								output.push('<div class="icono-excel icono-excel-',extension.substring(1,5),'"> <div style="position: relative;top: 100%;text-align: center;">',
 								escape(f.name), '</div> </div>');
 
 								$("#drop_zone").css({

@@ -608,7 +608,7 @@
 											<td>'+rows[0]["email"]+'</td>\n \
 										</tr>\n \
 										<tr>\n \
-											<th>Dias Personales Libres</th>\n \
+											<th>Dias Personales Disponibles</th>\n \
 											<td>'+rows[0]["dper"]+'</td>\n \
 										</tr>\n';
 
