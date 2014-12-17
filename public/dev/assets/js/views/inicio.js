@@ -210,6 +210,15 @@ $('#fc-eventos').fullCalendar( 'addEventSource',{
 		}
 		
   	});
+
+	if(typeof $.fn.fullCalendar != "undefined"){
+		$('.loading-container').fadeOut(function() {
+			$(this).remove();
+		});
+		$('.container-fluid').hide().css('visibility','visible').fadeIn('slow');
+			//.css('visibility', 'visible');
+
+	}
 //------------------------
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 

@@ -29,8 +29,7 @@ require(['/assets/js/app.js'],function(){
 							titulo	: $('#titulo').val(),
 							editor	: $('#editor').html()
 						};
-			
-			console.log("Enviar");
+						
 			fx_error(data);
 			if(typeof $('.has-error').get(0) == "undefined"){
 				$('#correo_modal').modal("show");
@@ -56,7 +55,6 @@ require(['/assets/js/app.js'],function(){
 			}// fin del if
 		});
 		$(document).on('keypress',function(e){
-			console.log("keypress")
 			if($('#editor').html() != "" && $('#editor').parent().hasClass('has-error')){
 				$("#editor").parent().removeClass('has-error has-feedback');
 				$('div[data-target = "#editor"] > .glyphicon.glyphicon-remove.form-control-feedback').remove();

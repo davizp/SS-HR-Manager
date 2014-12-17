@@ -1006,40 +1006,58 @@
 		permisos: {
 			auth:'session',
 			handler: function(request, reply) {
-				check_login(request,reply);//-------------------------
-				var vusuario 	= 	'<input type="text" class="form-control" id="colaborador" placeholder="Colaborador" value = "'
-									+request.auth.credentials.user.name+'" disabled>';
-				var strsql 		= 	"SELECT u.id_departamento as id,u.personal_restantes as dper,departamento as dep FROM departamentos d, usuarios u \
-									WHERE d.id_departamento = u.id_departamento AND u.email_usuario = '"+request.auth.credentials.user.email+
-									"' AND u.pas_usuario = '"+request.auth.credentials.user.password+"'";
-				console.log(strsql)
-				request.server.plugins['db'].pool.getConnection(function(err, connection) {
-					connection.query(strsql,function(err, rows) {
-						if(err) throw new Error(err);
-						var vdepartamento = vradio = vdper = "";
-						if(rows.length > 0){
-							vdepartamento 	= 	'<option value="'+rows[0]["id"]+ '"selected required>' + rows[0]["dep"]+'</option>';
-							vdper 			= 	rows[0]["dper"];
-						}
-						var strsql 		 	= 	"SELECT id_tipo_permiso as id, tipo_permiso as per FROM tipos_permisos";
-						connection.query(strsql,function(err, rows) {
-							if(rows.length > 0)
-								for(var i=0;i<rows.length; i++){
-									if(vdper == 0 && rows[i]["per"].search(/Personal/i)!= -1)
-										continue;
-									else
-										vradio += '<label class="btn btn-default" onclick = "fx_flotante($(this))"> \n \
-										\t	<input type="radio" name="tipo_permiso" value = "'+rows[i]["id"]+'" required>'+rows[i]["per"]+' \n \
-										</label>';
-								}
-							var vjs_dper = '<script> const vdper = '+vdper+';</script>'
-							reply.view('permisos', { js_view: 'permisos.js',js_dper:vjs_dper,dper: vdper,usuario:vusuario,departamento:vdepartamento,radio:vradio,login:nav_log(request)});
-						});
-
+				check_login(request,reply);
+				if(request.method === 'post'){
+					var id = request.auth.credentials.user.id;
+					switch(request.payload.accion){
+						case 'dp_aprobados':
+							var strsql = "		SELECT 	id_solicitud 								as id,		\
+														DATE_FORMAT(fper_solicitud, '%m/%d/%Y')		as fp, 		\
+														DATE_FORMAT(ftra_solicitud, '%m/%d/%Y')		as ft 		\
+												FROM 	solicitudes_permisos	 								\
+												WHERE 	aprobado 									= 	1 		\
+												AND		fper_solicitud 								> 	NOW()	\
+												AND		id_usuario 									= 	"+ id;
+						break;
+					}
+					console.log(strsql);
+					fx_sql(request,strsql,function(r){
+						return reply(r);
 					});
-					connection.release();
-				});
-				
+				}else if(request.method === 'get'){
+					var vusuario 	= 	'<input type="text" class="form-control" id="colaborador" placeholder="Colaborador" value = "'
+										+request.auth.credentials.user.name+'" disabled>';
+					var strsql 		= 	"SELECT u.id_departamento as id,u.personal_restantes as dper,departamento as dep FROM departamentos d, usuarios u \
+										WHERE d.id_departamento = u.id_departamento AND u.email_usuario = '"+request.auth.credentials.user.email+
+										"' AND u.pas_usuario = '"+request.auth.credentials.user.password+"'";
+					console.log(strsql)
+					request.server.plugins['db'].pool.getConnection(function(err, connection) {
+						connection.query(strsql,function(err, rows) {
+							if(err) throw new Error(err);
+							var vdepartamento = vradio = vdper = "";
+							if(rows.length > 0){
+								vdepartamento 	= 	'<option value="'+rows[0]["id"]+ '"selected required>' + rows[0]["dep"]+'</option>';
+								vdper 			= 	rows[0]["dper"];
+							}
+							var strsql 		 	= 	"SELECT id_tipo_permiso as id, tipo_permiso as per FROM tipos_permisos";
+							connection.query(strsql,function(err, rows) {
+								if(rows.length > 0)
+									for(var i=0;i<rows.length; i++){
+										if(vdper == 0 && rows[i]["per"].search(/Personal/i)!= -1)
+											continue;
+										else
+											vradio += '<label class="btn btn-default" onclick = "fx_flotante($(this))"> \n \
+											\t	<input type="radio" name="tipo_permiso" value = "'+rows[i]["id"]+'" required>'+rows[i]["per"]+' \n \
+											</label>';
+									}
+								var vjs_dper = '<script> const vdper = '+vdper+';</script>'
+								reply.view('permisos', { js_view: 'permisos.js',js_dper:vjs_dper,dper: vdper,usuario:vusuario,departamento:vdepartamento,radio:vradio,login:nav_log(request)});
+							});
+
+						});
+						connection.release();
+					});
+				}// fin del else
 			}
 		},
 		permisos_data: {
@@ -1077,7 +1095,7 @@
 							email(correo,"Nueva Solicitud de Permiso","Solicitud Pendiente","Nueva Solicitud de Permiso",strmsj);
 							/*****************************************************************
 							/**\/	 INSERT A LA BD
-							/**/ 		var flo = 	(typeof request.payload["flo"] != "undefined" && request.payload["flo"] != "")?
+							/**/ 	var flo = 	(typeof request.payload["flo"] != "undefined" && request.payload["flo"] != "")?
 							/**/			"'"+request.payload["flo"]+"',":"null,";
 							/**/
 							/**/	var strsql = "INSERT INTO solicitudes_permisos(id_usuario,id_departamento,id_tipo_permiso,"+
@@ -1086,36 +1104,35 @@
 							/**/	+ request.auth.credentials.user.dep		  +","
 							/**/	+ request.payload["tipo_permiso"]		  +","
 							/**/	+ "STR_TO_DATE('"+request.payload["fper"] +"', '%m-%d-%Y'),"
-									+ flo
+							/**/	+ flo
 							/**/	+ request.payload["tcon"]+","
 							/**/	+ "STR_TO_DATE('"+request.payload["ftra"]+"', '%m-%d-%Y'),NOW(),0);";
 							/**/	console.log(strsql);
-
-									// connection.query(strsql,function(err, rows) {
-									// 	if(err) throw new Error(err);
-									// 	console.log(rows);
-									// 	if(rows.affectedRows == 1){
-									// 		var id = rows.insertId;
-
-									// 		if(typeof request.payload["flo"] != "undefined" && request.payload["flo"] != ""){
-									// 			var x = request.payload["flo"].split(',');
-
-									// 			for(var v in x){
-									// 				x[v] = "("+ id +",STR_TO_DATE('" + x[v].trim() + "', '%m-%d-%Y'))";
-									// 			}
-									// 			x = x.join(',\n');
-									// 			strsql = "INSERT INTO flotante_solicitudes(id_solicitud,dflo_solicitud) VALUES \n" + x + ";";
-									// 			console.log(strsql);
-									// 			sql_execute(request, reply,strsql,"/");
-									// 		}
-									// 	}
-									// 	return reply.redirect('/');
-									// });
 							/**/	sql_execute(request, reply,strsql,"/");
 							/**\/
 							/*****************************************************************/
 
 
+						}
+						else{
+							/*****************************************************************
+							/**\/	 INSERT A LA BD PERO NO TIENE JEFE DE DEPARTAMENTO
+							/**/ 	var flo = 	(typeof request.payload["flo"] != "undefined" && request.payload["flo"] != "")?
+							/**/			"'"+request.payload["flo"]+"',":"null,";
+							/**/
+							/**/	var strsql = "INSERT INTO solicitudes_permisos(id_usuario,id_departamento,id_tipo_permiso,"+
+							/**/				"fper_solicitud,dflo_solicitud,dias_solicitud,ftra_solicitud,reg_doc,aprobado)"+
+							/**/	"VALUES("+request.auth.credentials.user.id+","
+							/**/	+ request.auth.credentials.user.dep		  +","
+							/**/	+ request.payload["tipo_permiso"]		  +","
+							/**/	+ "STR_TO_DATE('"+request.payload["fper"] +"', '%m-%d-%Y'),"
+							/**/	+ flo
+							/**/	+ request.payload["tcon"]+","
+							/**/	+ "STR_TO_DATE('"+request.payload["ftra"]+"', '%m-%d-%Y'),NOW(),0);";
+							/**/	console.log(strsql);
+							/**/	sql_execute(request, reply,strsql,"/");
+							/**\/
+							/*****************************************************************/
 						}
 					});
 					connection.release();

@@ -69,7 +69,7 @@
 				config: controller.public.correo
 			},
 			{
-				method: 'GET',
+				method: ['GET', 'POST'],
 				path: '/permisos',
 				config: controller.public.permisos
 			},

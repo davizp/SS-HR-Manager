@@ -13,11 +13,9 @@ require(['/assets/js/app.js'],function(){
 
 		});
 		$('.accion').click(function(){
-			console.log('cliick');
 			var data = fx_data();
 			fx_error(data);
 			if(typeof $('.has-error').get(0) == "undefined"){
-				console.log('$.ajax');
 				$.ajax({
 					url: '/mant_eventos',
 					type: "POST",

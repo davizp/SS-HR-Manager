@@ -64,7 +64,6 @@
 					f += dw[x[v].getDay()]+'	'+x[v].MDY('-')+',\n';
 
 				}
-				console.log(f);
 				$(this).html(f);
 				
 			});
@@ -182,6 +181,9 @@
 			
 			//Datepicker class --------------------------------------------------------------------
 			var today = new Date();
+				/* * * * * * * * * * * * * * * * * * * * *
+				 * DATEPICKER FECHA DEL PERMISO
+				 */
 				$(".datepicker").datepicker({ 
 					dateFormat:		'mm-dd-yy',
 					minDate:		new Date(today.getFullYear(),today.getMonth(),today.getDate()+1),

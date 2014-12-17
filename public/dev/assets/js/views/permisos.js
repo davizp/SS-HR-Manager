@@ -18,7 +18,52 @@ require(['/assets/js/app.js'],function(){
 				setTimeout(function(){$('#flotante').focus()},400);
 			break;
 		}
+
+
 	});//-- <!--  FIN   --> --
+
+	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - * 
+	 |	DATEPICKER FECHA DEL PERMISO 																 |
+	 |																								 |
+	 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		$.ajax({
+			url: '/permisos',
+			type: 'POST',
+			data:{accion:'dp_aprobados'},
+			success: function(r){
+				if(typeof r == "string") return $.ajax(this); //si no retorna el objecto
+				console.log(r)
+				$(".datepicker").datepicker("option", "beforeShowDay", function(date){
+					var s = jQuery.datepicker.formatDate('mm/dd/yy', date);
+					var d = new Date(s).getTime();
+					// SIN FINES DE SEMANA
+					if(new Date(s).getDay() == 6 || new Date(s).getDay() == 0)
+						return [false];
+
+					// QUITAR DIAS APROBADOS
+					for(var i = 0; i < r.length ; i++){						
+
+						var fi = new Date(r[i].fp).getTime();
+						var ff = new Date(r[i].ft).getTime();
+						// console.log('fi - '+r[i].fp)
+						// console.log('ff - '+r[i].ft)
+						// console.log('d - '+ s + '\n\n' )
+						
+						if( d >= fi && d < ff )
+							return [false];
+					}
+					return [true];
+
+				});
+				
+			}
+
+		});// $.ajax
+
+    /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - * 
+	 |	BLOQUEAR DIAS CONCEDIDOS																	 |
+	 |																								 |
+	 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 	$(document).on('keypress', '#tconcedido2', function (event) {
 			var character 	= 	((typeof event.key != 'undefined')?
