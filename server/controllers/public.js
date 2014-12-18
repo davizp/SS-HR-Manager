@@ -849,6 +849,12 @@
 
 					else if(request.payload["accion"] == 'eliminar')
 							strsql = "DELETE FROM usuarios WHERE id_usuario = "+request.payload["id"]+";";
+					else if(request.payload["accion"] == 'reset'){
+						strsql = "UPDATE usuarios SET personal_restantes = 5";
+						fx_sql(request,strsql,function(r){
+							return reply(r);
+						});
+					}
 					
 
 					console.log(strsql)

@@ -7,7 +7,26 @@ require(['/assets/js/app.js'],function(){
 			type: 'POST',
 			data:{accion:'reset'},
 			success: function(r){
+				if(r.affectedRows > 0){
+					var clase 	= 'danger';
+					var msj 	= 'Error al restaurar los días personales!'
+					$('#confirmReset').modal("hide");
+						clase 	= 'success';
+						msj 	= 'Días personales han sido restaurados!';
+						var row = t.fnGetNodes();
+						$(':nth-child(8)',row).text('5');
+						// $('tr:has(th) :nth-child(8)').text('Días Personales');
 
+					}
+
+				var msj = '	<div class="alert alert-'+ clase +' alert-dismissible" role="alert"> \
+								<button type="button" class="close" data-dismiss="alert"> \
+									<span aria-hidden="true">&times;</span><span class="sr-only">Close</span> \
+								</button> \
+								<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> \
+								</strong>' +  msj	+ '</strong>'
+							'</div>';
+				$(".container-fluid").prepend(msj);
 			}
 		});//ajax
 	});
