@@ -60,6 +60,11 @@
 			},
 			{
 				method: ['GET', 'POST'],
+				path: '/mant_feriados',
+				config: controller.public.mant_feriados
+			},
+			{
+				method: ['GET', 'POST'],
 				path: '/mant_eventos',
 				config: controller.public.mant_eventos
 			},

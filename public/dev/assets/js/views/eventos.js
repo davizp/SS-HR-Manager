@@ -1,5 +1,5 @@
 require(['/assets/js/app.js'],function(){
-    $(document).ready(function(){
+	$(document).ready(function(){
     	/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *
 		|	MANTENIMIENTO																													|
 		|																																	|

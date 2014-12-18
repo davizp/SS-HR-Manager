@@ -1,3 +1,4 @@
+var d_disp = [];
 require(['/assets/js/app.js'],function(){
 	mifuncion();
 	$("#badge_dper").html(vdper);
@@ -26,28 +27,30 @@ require(['/assets/js/app.js'],function(){
 	 |	DATEPICKER FECHA DEL PERMISO 																 |
 	 |																								 |
 	 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+	 
 		$.ajax({
 			url: '/permisos',
 			type: 'POST',
 			data:{accion:'dp_aprobados'},
 			success: function(r){
 				if(typeof r == "string") return $.ajax(this); //si no retorna el objecto
-				console.log(r)
-				$(".datepicker").datepicker("option", "beforeShowDay", function(date){
+				d_disp = r;
+				$(".datepicker").datepicker("option", "beforeShowDay", function(date){					
 					var s = jQuery.datepicker.formatDate('mm/dd/yy', date);
 					var d = new Date(s).getTime();
 					// SIN FINES DE SEMANA
 					if(new Date(s).getDay() == 6 || new Date(s).getDay() == 0)
 						return [false];
 
-					// QUITAR DIAS APROBADOS
-					for(var i = 0; i < r.length ; i++){						
 
+					// QUITAR DIAS APROBADOS
+					for(var i = 0; i < r.length ; i++){
 						var fi = new Date(r[i].fp).getTime();
 						var ff = new Date(r[i].ft).getTime();
 						// console.log('fi - '+r[i].fp)
 						// console.log('ff - '+r[i].ft)
 						// console.log('d - '+ s + '\n\n' )
+
 						
 						if( d >= fi && d < ff )
 							return [false];
@@ -118,20 +121,68 @@ require(['/assets/js/app.js'],function(){
 		console.log("SUBMIT");
 		return false;
 	});
-	$(".datepicker-flotante").multiDatesPicker({ 
-		dateFormat:		'mm-dd-yy',
-		changeMonth:	true,
-		monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-		// beforeShowDay:	function(dt){return [dt.getDay() == 0 || dt.getDay() == 6, ""];},
-		maxDate:		'today',
+	// $(".datepicker-flotante").multiDatesPicker({ 
+	// 	dateFormat:		'mm-dd-yy',
+	// 	changeMonth:	true,
+	// 	monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+	// 	// beforeShowDay:	function(dt){return [dt.getDay() == 0 || dt.getDay() == 6, ""];},
+	// 	maxDate:		'today',
 
-		onSelect: 		function(){
-			var cant = $(".datepicker-flotante").multiDatesPicker('getDates').length;
-			$('#tconcedido2').val(cant);
-			fx_tconcedido($('#tconcedido2'));
-			jQuery(this).multiDatesPicker("show");
-		}
-	}).val();
+	// 	onSelect: 		function(){
+	// 		var cant = $(".datepicker-flotante").multiDatesPicker('getDates').length;
+	// 		$('#tconcedido2').val(cant);
+	// 		fx_tconcedido($('#tconcedido2'));
+	// 		jQuery(this).multiDatesPicker("show");
+	// 	}
+	// }).val();
+	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - * 
+	 |	DATEPICKER AGREGAR FERIADOS 																 |
+	 |																								 |
+	 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+		$.ajax({
+			url: '/permisos',
+			type: 'POST',
+			data:{accion:'feriados'},
+			success: function(r){
+				console.log(r)
+				if(typeof r == "string") return $.ajax(this); //si no retorna el objecto
+				var today = new Date();
+				var fec = r[0].fec.split(',');
+				var temp = [];
+				for(var i = 0;i<fec.length;i++){
+					var f = new Date(fec[i]).getTime();
+					var n = new Date([today.getMonth(),today.getDate(),today.getFullYear()].join('/')).getTime();
+					if(f <= n)
+						temp.push(fec[i])
+				}
+				$('#full-year').multiDatesPicker('addDates', temp);
+				/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - * 
+				 |	DATEPICKER DIA FLOTANTE 																	 |
+				 |																								 |
+				 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+				$(".datepicker-flotante").multiDatesPicker({ 
+					dateFormat:		'mm-dd-yy',
+					changeMonth:	true,
+					monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+					beforeShowDay:	function(dt){
+						var string = jQuery.datepicker.formatDate('mm/dd/yy', dt);
+						if(temp.indexOf(string) != -1)
+							return [true];
+						else
+							return [dt.getDay() == 0 || dt.getDay() == 6,""];
+					},
+					maxDate:		'today',
+
+					onSelect: 		function(){
+						var cant = $(".datepicker-flotante").multiDatesPicker('getDates').length;
+						$('#tconcedido2').val(cant);
+						fx_tconcedido($('#tconcedido2'));
+						jQuery(this).multiDatesPicker("show");
+					}
+				}).val();				
+			}
+
+		});// $.ajax
 
 });
 
@@ -167,20 +218,60 @@ function fx_tconcedido(x){
         diapresentarse = date + selecttconcedido;
 
         //---- RECORRE LA SEMANA Y SALTA FINES DE SEMANA ******
-        for (var i = 0; i < selecttconcedido;i++){
-            dayofweek = date.getDay();
-            if(dayofweek==6 || dayofweek==0 ){
-                date.setDate(date.getDate() + 2);
-                i--;
-            }
-            else
-                date.setDate(date.getDate() + 1);            
+        //date.setDate(date.getDate() + 1);
+    //     for (var i = 0; i < selecttconcedido;i++){
+    //         dayofweek = date.getDay();
+    //         var d = date.setDate(date.getDate() + 1);
+    //         var dw = d.getDay();
+    //         if(dw ==6 || dw ==0 ){
+    //             date.setDate(date.getDate() + 2);
+				// i--;
+    //         }else{
+    //         	console.log(d_disp)
+    //         	for(var p = 0; p < d_disp.length ; p++){
+				// 	var fi = new Date(d_disp[p].fp).getTime();
+				// 	var ff = new Date(d_disp[p].ft).getTime();
+				// 	console.log( date)
+				// 	console.log( d_disp[p].fp)
+				// 	if( date.getTime() >= fi && date.getTime() < ff ){
+				// 		date.setDate(date.getDate() + 1);
+				// 		i--;
+				// 	}
+				// 	else{
+    //             		date.setDate(date.getDate() + 1);
+				// 	}
+				// }
+    //         }
+    		/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - * 
+			 |	FUNCION PARA CALCULAR EL DIA QUE SE PRESENTA A TRABAJAR										 |
+			 |																								 |
+			 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    		var ds = new Date(selectfpermiso);
+
+    		for(;selecttconcedido!=0;date.setDate(date.getDate() + 1)){
+					ds = new Date(date.getTime() + 86400000);
+				var dw = ds.getDay();
+
+				
+
+				if ( dw !=6 && dw !=0){
+					for(var p = 0;p < d_disp.length; p++){
+						var fi = new Date(d_disp[p].fp).getTime();
+						var ff = new Date(d_disp[p].ft).getTime();
+
+						if( !(ds.getTime() >= fi && ds.getTime() < ff) )
+							selecttconcedido--;
+					}
+					
+				}
+					
+
             }//fin del for
 
             //---------- Si cae día SABADO *************************
-            dayofweek = date.getDay();
-            if(dayofweek==6 || dayofweek==0 )
-                date.setDate(date.getDate() + 2);
+            // dayofweek = date.getDay();
+            // if(dayofweek==6 || dayofweek==0 )
+            //     date.setDate(date.getDate() + 2);
             
 
             //---------- SET Nueva Fecha en TextBox - ****************

@@ -191,6 +191,8 @@
 					onSelect: 		function( selectedDate ) {
 										$(this).parent().removeClass('has-error has-feedback');
 										$('.glyphicon.glyphicon-remove.form-control-feedback',$(this).parent()).remove();
+										if($('#tconcedido2').val() != "")
+											fx_tconcedido($('#tconcedido2'));
 									}
 				}).val();
 

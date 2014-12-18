@@ -277,6 +277,36 @@
 				reply.view('fc_aprobados', {js_view:'inicio.js',login:nav_log(request)});
 			}
 		},
+		mant_feriados: {
+			auth:'session',			
+			handler: function (request, reply) {
+				check_login(request,reply);
+				fx_is_admin(request, reply);
+				if(request.method === 'post'){
+					if(request.payload.accion == 'cargar'){
+						var strsql = "SELECT fec_feriados as fec FROM feriados WHERE id_feriado = YEAR(NOW())";
+					}else{
+						if(request.payload.fec.length > 0)
+							var strsql = "	INSERT INTO feriados(id_feriado,fec_feriados)	\
+											VALUES				("+request.payload.id+",	\
+																'"+request.payload.fec+"')	\
+											ON DUPLICATE KEY UPDATE 						\
+											id_feriado 		=  "+request.payload.id+",		\
+											fec_feriados	= '"+request.payload.fec+"'";
+						else
+							var strsql = "DELETE IGNORE FROM feriados WHERE id_feriado = " +request.payload.id;
+					}
+					console.log(strsql);
+
+					fx_sql(request,strsql,function(r){
+						return reply(r);
+					});
+				}else{
+					return reply.view('mant_feriados', {js_view:'feriados.js',login:nav_log(request)});
+				}
+
+			}
+		},
 		mant_eventos: {
 			auth:'session',			
 			handler: function (request, reply) {
@@ -1019,6 +1049,9 @@
 												AND		fper_solicitud 								> 	NOW()	\
 												AND		id_usuario 									= 	"+ id;
 						break;
+						case 'feriados':
+						var strsql = "SELECT fec_feriados as fec FROM feriados WHERE id_feriado = YEAR(NOW())";
+						break
 					}
 					console.log(strsql);
 					fx_sql(request,strsql,function(r){
