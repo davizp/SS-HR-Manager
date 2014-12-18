@@ -46,31 +46,40 @@ function form_eliminar(x){
 	$(	"#msj_eliminar"	).html("¿Estas seguro de Eliminar a <h4 style = 'display:inline;'><span class = 'label label-danger'>"+
 	hijos[0].innerHTML+"</span></h4>?");
 }
-
-function fx_accion(valor) {
-	if(valor != "eliminar")
-		var form = document.getElementById('form_tipos_permisos');
-	else
-		var form = document.createElement("form");
-
-
-	if(valor != "nuevo" && arguments.length > 1){
-		var textbox2 			= 	document.createElement("input");
-		textbox2.value			=	arguments[1];
-		textbox2.name			=	"id";
-		textbox2.style.display 	= 	"none";
-		form.appendChild(textbox2);
+function fx_error(valor){
+	if(valor != "eliminar"){
+		if($(" [name ='tipo_permiso']").val() == ''){
+			$("[name ='tipo_permiso']").parent().addClass('has-error has-feedback').append('<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>');
+		}
 	}
+}
+function fx_accion(valor) {
+	fx_error(valor);
+	if(typeof $('.has-error').get(0) == "undefined"){
+		if(valor != "eliminar")
+			var form = document.getElementById('form_tipos_permisos');
+		else
+			var form = document.createElement("form");
 
-	var textbox = document.createElement("input"); 
 
-	form.method 			=	"POST";
-	form.action 			=	"/tipos_permisos-data";
-	textbox.value			=	valor;
-	textbox.name			=	"accion";
-	textbox.style.display 	=	"none";
-	form.appendChild(textbox);
-	if(valor == "eliminar")
-		document.body.appendChild(form);
-	form.submit();
+		if(valor != "nuevo" && arguments.length > 1){
+			var textbox2 			= 	document.createElement("input");
+			textbox2.value			=	arguments[1];
+			textbox2.name			=	"id";
+			textbox2.style.display 	= 	"none";
+			form.appendChild(textbox2);
+		}
+
+		var textbox = document.createElement("input"); 
+
+		form.method 			=	"POST";
+		form.action 			=	"/tipos_permisos-data";
+		textbox.value			=	valor;
+		textbox.name			=	"accion";
+		textbox.style.display 	=	"none";
+		form.appendChild(textbox);
+		if(valor == "eliminar")
+			document.body.appendChild(form);
+		form.submit();
+	}
 }

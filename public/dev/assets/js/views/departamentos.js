@@ -41,28 +41,38 @@ function form_eliminar(x){
 	$(	"#eliminar"		).attr("onclick","fx_accion('eliminar',"+id_padre+")");
 	$(	"#msj_eliminar"	).html("¿Estas seguro de Eliminar a <h4 style = 'display:inline;'><span class = 'label label-danger'>"+hijos[0].innerHTML+"</span></h4>?");
 }
+function fx_error(valor){
+	if(valor != "eliminar"){
+		if($(" [name ='dep']").val() == ''){
+			$("[name ='dep']").parent().addClass('has-error has-feedback').append('<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>');
+		}
+	}
+}
 function fx_accion(valor) {
-	if(valor != "eliminar")
-		var form 	=	document.getElementById('form_departamentos');
-	else{
-		var form 	= 	document.createElement("form");
-		form.method = 	"POST";
-		form.action = 	"/departamentos-data";   
-	}
+	fx_error(valor);
+	if(typeof $('.has-error').get(0) == "undefined"){
+		if(valor != "eliminar")
+			var form 	=	document.getElementById('form_departamentos');
+		else{
+			var form 	= 	document.createElement("form");
+			form.method = 	"POST";
+			form.action = 	"/departamentos-data";   
+		}
 
-	if(valor != "nuevo" && arguments.length > 1){
-		var textbox2 			=	document.createElement("input");
-		textbox2.value			=	arguments[1];
-		textbox2.name			=	"id";
-		textbox2.style.display	=	"none";
-		form.appendChild(textbox2);
-	}
+		if(valor != "nuevo" && arguments.length > 1){
+			var textbox2 			=	document.createElement("input");
+			textbox2.value			=	arguments[1];
+			textbox2.name			=	"id";
+			textbox2.style.display	=	"none";
+			form.appendChild(textbox2);
+		}
 
-	var textbox 			=	document.createElement("input"); 
-	textbox.value			=	valor;
-	textbox.name			=	"accion";
-	textbox.style.display	= 	"none";
-	form.appendChild(textbox);
-	if(valor == "eliminar") 	document.body.appendChild(form);
-	form.submit();
+		var textbox 			=	document.createElement("input"); 
+		textbox.value			=	valor;
+		textbox.name			=	"accion";
+		textbox.style.display	= 	"none";
+		form.appendChild(textbox);
+		if(valor == "eliminar") 	document.body.appendChild(form);
+		form.submit();
+	}
 }
