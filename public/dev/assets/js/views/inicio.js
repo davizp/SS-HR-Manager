@@ -120,6 +120,35 @@ $('#fc-eventos').fullCalendar( 'addEventSource',{
 		}
 	});// FIN
 
+	$('#fc-eventos').fullCalendar( 'addEventSource',{
+		events: function(start, end, timezone, callback) {
+			$.ajax({
+				url: '/permisos',
+				type: "POST",
+				data: {accion: "feriados"},
+				success: function(r) {
+					if(typeof r == "string") return $.ajax(this); //si no retorna el objecto
+					var events 	= [];
+					var res = r[0].fec.split(',');
+					console.log(r)
+					for(var i = 0; i<res.length;i++){
+
+							events.push({
+								title		: 		"Feriado",
+								start		: 		new Date(res[i]),
+								end			: 		new Date(res[i]),
+								msg			: 		"Éste día es un feriado nacional.",
+								allDay		:		true,
+								color 		: 		'#e74c3c',
+								textColor 	: 		'white'
+							});
+					}
+					callback (events);
+				}// success
+			});// $.ajax
+		}
+	});// FIN
+
  	$('#fc-eventos').fullCalendar( 'addEventSource',{
 		events: function(start, end, timezone, callback) {
 			$.ajax({
