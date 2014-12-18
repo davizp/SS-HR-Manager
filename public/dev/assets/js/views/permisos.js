@@ -255,6 +255,8 @@ function fx_tconcedido(x){
 				
 
 				if ( dw !=6 && dw !=0){
+					if(d_disp == 0)
+						selecttconcedido--;
 					for(var p = 0;p < d_disp.length; p++){
 						var fi = new Date(d_disp[p].fp).getTime();
 						var ff = new Date(d_disp[p].ft).getTime();
