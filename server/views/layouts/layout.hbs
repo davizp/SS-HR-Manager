@@ -70,12 +70,16 @@
 					<li><a href="/permisos"><div class="icono-aside icono-permisos"></div>Nueva Solicitud</a></li>
 					<li><a href="/historial_solicitudes"><div class="icono-aside icono-historial"></div>Mi Historial de Solicitudes</a></li>
 					<li><a href="/fc_eventos"><div class="icono-aside icono-eventos"></div>Calendario</a></li>
+					{{#unless jefe}}
+					<li><a href="/fc_aprobados"><div class="icono-aside icono-aprobados"></div>Solicitudes Aprobadas</a></li>
+					{{/unless}}
 					{{!-- <li><a href="#"><div class="icono-aside icono-chat"></div>Chat</a></li> --}}
 
 					{{#if jefe}}
 					<li class="sidebar-brand"><a href="#">Menú de Jéfe</a></li>
 					<li><a href="/solicitudes_permisos"><div class="icono-aside icono-solicitud_permiso"></div>Solicitudes de Permisos</a></li>
 					<li><a href="/solicitudes_permisos-historial"><div class="icono-aside icono-historial_solicitudes"></div>Historial de Solicitudes</a></li>
+					<li><a href="/fc_aprobados"><div class="icono-aside icono-aprobados"></div>Solicitudes Aprobadas</a></li>
 					{{/if}}
 
 					{{else}}
