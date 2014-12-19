@@ -69,12 +69,11 @@ require(['/assets/js/app.js'],function(){
 						f		= 	$( '#endDate' ).val(),
 						d 		=	aData[2];
 
-					var fi 		= new Date(String(i)),
-						ff 		= new Date(String(f)),
-						fd 		= new Date(String(d));
+					var fi 		= new Date(String(i).split('-').join('/')),
+						ff 		= new Date(String(f).split('-').join('/')),
+						fd 		= new Date(String(d).split('-').join('/'));
 
 
-			        console.log(d);
 			        if ( i == "" && f == "" )
 					{
 						//console.log("( i == '' && f == '' )");
