@@ -16,7 +16,10 @@
 	</div>
 </div>
 
-<div class = "container-fluid">
+<div class="loading-container">
+	<div class="pulse"></div>
+</div>
+<div class = "container-fluid" style="visibility:hidden;">
 	<div class = "container">
 	<!--  CALENDAR -->
 		<div class="panel panel-primary">
@@ -25,7 +28,12 @@
 				<div style="clear:both;"></div>
 			</div>
 			<div class="panel-body">
-				<div id="fc-eventos"></div>				
+				<div id="fc-eventos"></div>
+				<br/>
+				<span class = "fc-event" style ="height:15px;width:15px;display: inline-block;"></span> Eventos <br/>
+				<span class = "fc-event" style ="height:15px;width:15px;display: inline-block;background:#428bca;border-color: #428bca;"></span> Cumpleaños <br/>
+				<span class = "fc-event" style ="height:15px;width:15px;display: inline-block;background:#f1c40f;border-color: #f1c40f;"></span> Aniversario de Colaboradores <br/>
+				<span class = "fc-event" style ="height:15px;width:15px;display: inline-block;background:#e74c3c;border-color: #e74c3c;"></span> Feriado Nacional <br/>			
 			</div>
 		</div>
 	<!-- /CALENDAR -->
