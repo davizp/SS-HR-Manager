@@ -1,4 +1,5 @@
-var d_disp = [];
+var d_disp = []; // días aprobados
+var d_fer  = []; // días feriados
 require(['/assets/js/app.js'],function(){
 	mifuncion();
 	$("#badge_dper").html(vdper);
@@ -23,45 +24,7 @@ require(['/assets/js/app.js'],function(){
 
 	});//-- <!--  FIN   --> --
 
-	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - * 
-	 |	DATEPICKER FECHA DEL PERMISO 																 |
-	 |																								 |
-	 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-	 
-		$.ajax({
-			url: '/permisos',
-			type: 'POST',
-			data:{accion:'dp_aprobados'},
-			success: function(r){
-				if(typeof r == "string") return $.ajax(this); //si no retorna el objecto
-				d_disp = r;
-				$(".datepicker").datepicker("option", "beforeShowDay", function(date){					
-					var s = jQuery.datepicker.formatDate('mm/dd/yy', date);
-					var d = new Date(s).getTime();
-					// SIN FINES DE SEMANA
-					if(new Date(s).getDay() == 6 || new Date(s).getDay() == 0)
-						return [false];
 
-
-					// QUITAR DIAS APROBADOS
-					for(var i = 0; i < r.length ; i++){
-						var fi = new Date(r[i].fp).getTime();
-						var ff = new Date(r[i].ft).getTime();
-						// console.log('fi - '+r[i].fp)
-						// console.log('ff - '+r[i].ft)
-						// console.log('d - '+ s + '\n\n' )
-
-						
-						if( d >= fi && d < ff )
-							return [false];
-					}
-					return [true];
-
-				});
-				
-			}
-
-		});// $.ajax
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - * 
 	 |	BLOQUEAR DIAS CONCEDIDOS																	 |
@@ -146,6 +109,7 @@ require(['/assets/js/app.js'],function(){
 			success: function(r){
 				console.log(r)
 				if(typeof r == "string") return $.ajax(this); //si no retorna el objecto
+				d_fer  = r;
 				var today = new Date();
 				var fec = r[0].fec.split(',');
 				var temp = [];
@@ -180,6 +144,48 @@ require(['/assets/js/app.js'],function(){
 						jQuery(this).multiDatesPicker("show");
 					}
 				}).val();				
+			}
+
+		});// $.ajax
+
+	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - * 
+	 |	DATEPICKER FECHA DEL PERMISO 																 |
+	 |																								 |
+	 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+	 
+		$.ajax({
+			url: '/permisos',
+			type: 'POST',
+			data:{accion:'dp_aprobados'},
+			success: function(r){
+				if(typeof r == "string") return $.ajax(this); //si no retorna el objecto
+				d_disp = r;
+				$(".datepicker").datepicker("option", "beforeShowDay", function(date){					
+					var s = jQuery.datepicker.formatDate('mm/dd/yy', date);
+					var d = new Date(s).getTime();
+					// SIN FINES DE SEMANA
+					if(new Date(s).getDay() == 6 || new Date(s).getDay() == 0)
+						return [false];
+					if(d_fer[0].fec.search(s) > -1)
+						return [false];
+
+
+					// QUITAR DIAS APROBADOS
+					for(var i = 0; i < r.length ; i++){
+						var fi = new Date(r[i].fp).getTime();
+						var ff = new Date(r[i].ft).getTime();
+						// console.log('fi - '+r[i].fp)
+						// console.log('ff - '+r[i].ft)
+						// console.log('d - '+ s + '\n\n' )
+						
+						
+						if( d >= fi && d < ff )
+							return [false];
+					}
+					return [true];
+
+				});
+				
 			}
 
 		});// $.ajax
@@ -255,12 +261,13 @@ function fx_tconcedido(x){
 				
 
 				if ( dw !=6 && dw !=0){
+					if(d_fer[0].fec.search(ds.MDY()) > -1)
+						continue;
 					if(d_disp == 0)
 						selecttconcedido--;
 					for(var p = 0;p < d_disp.length; p++){
 						var fi = new Date(d_disp[p].fp).getTime();
 						var ff = new Date(d_disp[p].ft).getTime();
-
 						if( !(ds.getTime() >= fi && ds.getTime() < ff) )
 							selecttconcedido--;
 					}
