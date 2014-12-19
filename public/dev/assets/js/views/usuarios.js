@@ -7,9 +7,9 @@ require(['/assets/js/app.js'],function(){
 			type: 'POST',
 			data:{accion:'reset'},
 			success: function(r){
+				var clase 	= 'danger';
+				var msj 	= 'Error al restaurar los días personales! Intenta nuevamente.'
 				if(r.affectedRows > 0){
-					var clase 	= 'danger';
-					var msj 	= 'Error al restaurar los días personales!'
 					$('#confirmReset').modal("hide");
 						clase 	= 'success';
 						msj 	= 'Días personales han sido restaurados!';

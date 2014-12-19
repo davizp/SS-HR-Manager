@@ -137,7 +137,8 @@ $('#fc-eventos').fullCalendar( 'addEventSource',{
 								title		: 		"Feriado",
 								start		: 		new Date(res[i]),
 								end			: 		new Date(res[i]),
-								msg			: 		"Éste día es un feriado nacional.",
+								msg			: 		"<span class='glyphicon glyphicon-flag' style='font-size: 18px;'>"+
+													"</span> Éste día es un feriado nacional.",
 								allDay		:		true,
 								color 		: 		'#e74c3c',
 								textColor 	: 		'white'
